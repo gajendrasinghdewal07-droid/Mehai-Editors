@@ -6,7 +6,7 @@ async function upload() {
     formData.append("file", file);
     formData.append("prompt", prompt);
 
-    let res = await fetch("https://mehai-editors1.onrender.com", {
+    let res = await fetch("/edit", {
         method: "POST",
         body: formData
     });
