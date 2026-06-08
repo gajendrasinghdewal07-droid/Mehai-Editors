@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>V10 AI Editor</title>
+    <title>V1 Video Editor</title>
 </head>
 <body>
 
-<h2>AI Video Editor</h2>
+    <h2>V1 Video Editor</h2>
 
-<input type="file" id="video">
-<input type="text" id="prompt" placeholder="Enter edit style">
+    <input type="file" id="video">
+    <br><br>
 
-<button onclick="upload()">Edit Video</button>
+    <input type="text" id="prompt" placeholder="Enter prompt">
+    <br><br>
 
-<script src="app.js"></script>
+    <button onclick="upload()">Upload</button>
+
+    <p id="result"></p>
+
+    <script src="app.js"></script>
 
 </body>
 </html>
