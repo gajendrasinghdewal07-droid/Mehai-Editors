@@ -1,27 +1,34 @@
 from fastapi import FastAPI, UploadFile, File, Form
-from fastapi.responses import FileResponse
-import os
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
-os.makedirs("uploads", exist_ok=True)
-
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def home():
-    return FileResponse("index.html")
+    return """
+    <html>
+    <body>
+        <h2>Mehai Editor V0</h2>
 
-@app.post("/edit")
-async def edit_video(
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file"><br><br>
+
+            <input type="text" name="prompt" placeholder="Enter Prompt"><br><br>
+
+            <button type="submit">Upload</button>
+        </form>
+
+    </body>
+    </html>
+    """
+
+@app.post("/upload")
+async def upload(
     file: UploadFile = File(...),
     prompt: str = Form(...)
 ):
-    file_path = f"uploads/{file.filename}"
-
-    with open(file_path, "wb") as f:
-        f.write(await file.read())
-
     return {
-        "success": True,
+        "message": "Video received successfully",
         "filename": file.filename,
         "prompt": prompt
     }
